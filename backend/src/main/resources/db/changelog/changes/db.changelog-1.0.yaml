@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - preConditions:
+  - changeSet:
+      id: 1
+      author: v
+      changes:
+        - createTable:
+            tableName: test
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: test
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: v
+      changes:
+        - addColumn:
+            tableName: test
+            columns:
+              - column:
+                  name: test2
+                  type: varchar(255)
