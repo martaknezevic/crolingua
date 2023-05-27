@@ -5,27 +5,37 @@ databaseChangeLog:
       author: v
       changes:
         - createTable:
-            tableName: test
+            tableName: tutorials
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: test
-                  type: varchar(255)
+                  name: title
+                  type: text
                   constraints:
                     nullable: false
-  - changeSet:
-      id: 2
-      author: v
-      changes:
-        - addColumn:
-            tableName: test
-            columns:
               - column:
-                  name: test2
-                  type: varchar(255)
+                  name: short_description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: picture_url
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: level
+                  type: int
+                  constraints:
+                    nullable: false
