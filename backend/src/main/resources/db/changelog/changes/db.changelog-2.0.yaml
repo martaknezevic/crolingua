@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - preConditions:
+  - changeSet:
+      id: 2
+      author: v
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastname
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: int
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: tutorial_completed
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tutorial_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - addPrimaryKey:
+                  tableName: tutorial_completed
+                  columnNames: user_id, tutorial_id
+              - addForeignKeyConstraint:
+                  baseColumnNames: user_id
+                  baseTableName: tutorial_completed
+                  referencedColumnNames: id
+                  referencedTableName: users
+              - addForeignKeyConstraint:
+                  baseColumnNames: tutorial_id
+                  baseTableName: tutorial_completed
+                  referencedColumnNames: id
+                  referencedTableName: tutorials

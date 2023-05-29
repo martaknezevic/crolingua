@@ -5,7 +5,7 @@ import com.miv.croatica.model.TutorialLevel;
 import com.miv.croatica.service.TutorialService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,20 +13,11 @@ import java.util.List;
 
 @RequestMapping("/api/tutorial")
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin
 public class TutorialController {
 
-    @Data
-    @AllArgsConstructor
-    private static class ShortTutorialDTO {
-        private String title;
-        private String shortDescription;
-        private String pictureUrl;
-        private TutorialLevel level;
-        private long id;
-    }
-
-    @Autowired
-    private TutorialService tutorialService;
+    private final TutorialService tutorialService;
 
     @GetMapping
     public List<Tutorial> readAllTutorials() {
@@ -58,5 +49,15 @@ public class TutorialController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleException(TutorialException ex) {
         return ex.getMessage();
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class ShortTutorialDTO {
+        private String title;
+        private String shortDescription;
+        private String pictureUrl;
+        private TutorialLevel level;
+        private long id;
     }
 }

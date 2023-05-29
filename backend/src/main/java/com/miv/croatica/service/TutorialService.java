@@ -1,17 +1,32 @@
 package com.miv.croatica.service;
 
 import com.miv.croatica.model.Tutorial;
+import com.miv.croatica.repository.TutorialRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface TutorialService {
+@Service
+@RequiredArgsConstructor
+public class TutorialService {
 
-    Tutorial upsertTutorial(Tutorial tutorial);
+    private final TutorialRepository tutorialRepository;
 
-    Optional<Tutorial> readTutorial(long id);
+    public Tutorial upsertTutorial(Tutorial tutorial) {
+        return tutorialRepository.save(tutorial);
+    }
 
-    List<Tutorial> readAllTutorials();
+    public Optional<Tutorial> readTutorial(long id) {
+        return tutorialRepository.findById(id);
+    }
 
-    void deleteTutorial(long id);
+    public List<Tutorial> readAllTutorials() {
+        return tutorialRepository.findAll();
+    }
+
+    public void deleteTutorial(long id) {
+        tutorialRepository.deleteById(id);
+    }
 }
